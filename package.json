@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-router",
-  "version": "1.0.0",
-  "description": "Basic skeleton codebase for React/Redux/Router applications.",
+  "name": "Birb's Portfolio",
+  "version": "0.0.1",
+  "description": "Personal Portfolio App built in React",
   "scripts": {
     "preinstall": "npm set audit false",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
@@ -25,12 +25,12 @@
     "sass",
     "css module"
   ],
-  "author": "Your Name Here",
+  "author": "Birb",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bottega-code-school/js-builder/issues"
+    "url": "https://github.com/birbbbbb/birb-react-portfolio/issues"
   },
-  "homepage": "https://github.com/bottega-code-school/js-builder",
+  "homepage": "https://github.com/birbbbbb/birb-react-portfolio",
   "dependencies": {
     "ajv": "6.12.0",
     "axios": "0.21.1",

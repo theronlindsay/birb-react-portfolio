@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+import PortfolioContainer from "./portfolio/portfolio-container";
+import PortfolioItem from "./portfolio/portfolio-item";
+// import { container } from 'webpack';
+
 export default class App extends Component {
   render() {
     return (
@@ -9,6 +13,7 @@ export default class App extends Component {
         <div href="time">
           {moment().format('MMMM Do YYYY, h:mm:ss a')}
         </div>
+          <PortfolioContainer />
       </div>
     );
   }
