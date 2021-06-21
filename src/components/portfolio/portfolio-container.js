@@ -8,11 +8,21 @@ export default class PortfolioContainer extends Component{
         this.state = {
             pageTitle: "Welcome to my Portfolio",
             data: [
-            {title: "Eventbrite"},
-            {title: "Quip"},
-            {title: "Ministry Safe"}]
+            {title: "Eventbrite", Category: "eCommerce"},
+            {title: "Quip", Category: "eCommerce"},
+            {title: "Ministry Safe", Category: "Other"}]
         };
         console.log("Portfolio Cointainer has rendered!");
+
+        this.handleFilter = this.handleFilter.bind(this);
+        }
+
+    handleFilter(filter){
+        this.setState({
+            data: this.state.data.filter(item => {
+                return item.Category
+            })
+        })
     }
 
     portfolioItems(){
@@ -25,10 +35,13 @@ export default class PortfolioContainer extends Component{
     render(){
         return(
             <div>
-                <h2>
-                    {this.state.pageTitle}
-                </h2>
+                <h2>{this.state.pageTitle}</h2>
+
+                <button onClick ={() => this.handleFilter('eCommerce')}>eCommerce</button>
+                <button onClick ={() => this.handleFilter('eCommerce')}>Other</button>
+
                 {this.portfolioItems()}
+
             </div>
         )
     }
