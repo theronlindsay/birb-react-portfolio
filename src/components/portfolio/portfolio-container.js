@@ -7,6 +7,7 @@ export default class PortfolioContainer extends Component{
 
         this.state = {
             pageTitle: "Welcome to my Portfolio",
+            isLoading: true,
             data: [
             {title: "Eventbrite", Category: "eCommerce"},
             {title: "Quip", Category: "eCommerce"},
@@ -15,12 +16,12 @@ export default class PortfolioContainer extends Component{
         console.log("Portfolio Cointainer has rendered!");
 
         this.handleFilter = this.handleFilter.bind(this);
-        }
+    }
 
     handleFilter(filter){
         this.setState({
             data: this.state.data.filter(item => {
-                return item.Category
+                return item.Category === filter;
             })
         })
     }
@@ -33,12 +34,17 @@ export default class PortfolioContainer extends Component{
     }
 
     render(){
+
+        if(this.state.isLoading){
+            return <div>Loading...</div>
+        }
+
         return(
             <div>
                 <h2>{this.state.pageTitle}</h2>
 
                 <button onClick ={() => this.handleFilter('eCommerce')}>eCommerce</button>
-                <button onClick ={() => this.handleFilter('eCommerce')}>Other</button>
+                <button onClick ={() => this.handleFilter('Other')}>Other</button>
 
                 {this.portfolioItems()}
 
