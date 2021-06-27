@@ -1,0 +1,59 @@
+.portfolioItemsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  .portfolioItem {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    // padding: 0.5vw;
+
+    .portfolioImgBackground {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 350px;
+      width: 100%;
+      border-radius: 40px;
+    }
+
+    .imgText {
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding-left: 100px;
+      padding-right: 100px;
+
+      &:hover .subtitle {
+        color: $orange;
+        font-weight: 400;
+      }
+
+      .subtitle {
+        transition: 1s ease-in-out;
+        color: transparent;
+      }
+
+      .logoWrapper img {
+        width: 50%;
+        margin-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.image-blur {
+  transition: 1s;
+  filter: brightness(10%);
+}
