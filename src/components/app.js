@@ -4,6 +4,7 @@ import{
   Switch,
   Route
 } from 'react-router-dom';
+import axios from 'axios';
 
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
@@ -20,8 +21,55 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      loggedInStaus: "NOT_LOGGED_IN",
+      loggedInStatus: "NOT_LOGGED_IN"
     }
+
+    this.handleSuccessfulLogin =this.handleSuccessfulLogin.bind(this);
+    this.handleUnSuccessfulLogin =this.handleUnSuccessfulLogin.bind(this);
+  }
+
+  handleSuccessfulLogin(){
+    this.setState({
+      loggedInStaus: "LOGGED_IN"
+    })
+  }
+
+  handleUnSuccessfulLogin(){
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    })
+  }
+
+  checkLoginStatus(){
+    return axios.get("https://api.devcamp.space/logged_in", {
+      withCredentials: true
+    }).then(response => {
+      console.log("logged_in return", response);
+      const loggedIn = response.data.logged_in;
+      const loggedInStatus = this.state.loggedInStatus;
+
+      // If loggedIn and status LOGGED_IN => return data
+      // If loggedIN and status NOT_LOGGED_IN => update state to LOGGED_IN
+      // If !loggedIN and status LOGGED_IN => update state to NOT_LOGGED_IN
+      
+      if(loggedIn && loggedInStatus === "LOGGED_IN"){
+        return loggedIn;
+      } else if(loggedIn && loggedInStatus === "NOT_LOGGED_IN"){
+        this.setState({
+          loggedInStatus: "LOGGED_IN"
+        });
+      } else if(!loggedIn && loggedInStatus === "LOGGED_IN"){
+        this.setState({
+          loggedInStatus: "NOT_LOGGED_IN"
+        });
+      }
+    }).catch(error => {
+      console.log("Error", error);
+    })
+  }
+
+  componentDidMount(){
+    this.checkLoginStatus();
   }
 
   render() {
@@ -32,9 +80,15 @@ export default class App extends Component {
             <div>
               <NavigationContainer />
 
+              <h2>{this.state.loggedInStatus}</h2>
+
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/auth" component={Auth} />
+
+                <Route path="/auth" render={props => (
+                  <Auth {...props} handleSuccessfulLogin={this.handleSuccessfulLogin} handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}/>
+                )}/>
+
                 <Route path="/about-me" component={About} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/blog" component = {Blog} />
