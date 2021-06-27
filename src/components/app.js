@@ -26,15 +26,22 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin =this.handleSuccessfulLogin.bind(this);
     this.handleUnSuccessfulLogin =this.handleUnSuccessfulLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleSuccessfulLogin(){
     this.setState({
-      loggedInStaus: "LOGGED_IN"
+      loggedInStatus: "LOGGED_IN"
     })
   }
 
   handleUnSuccessfulLogin(){
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    })
+  }
+
+  handleLogout(){
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN"
     })
@@ -72,13 +79,19 @@ export default class App extends Component {
     this.checkLoginStatus();
   }
 
+  authorizePages(){
+    return[
+      <Route path="/blog" component = {Blog} />
+    ]
+  }
+
   render() {
     
     return (
       <div className='container'>
           <Router>
             <div>
-              <NavigationContainer />
+              <NavigationContainer loggedInStatus={this.state.loggedInStatus} handleLogout={this.handleLogout} />
 
               <h2>{this.state.loggedInStatus}</h2>
 
@@ -91,7 +104,7 @@ export default class App extends Component {
 
                 <Route path="/about-me" component={About} />
                 <Route path="/contact" component={Contact} />
-                <Route path="/blog" component = {Blog} />
+                {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizePages():null}
                 <Route exact path="/portfolio/:slug" component = {PortfolioDetail} />
 
                 <Route component = {NoMatch} />
