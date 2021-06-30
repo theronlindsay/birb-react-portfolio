@@ -1,0 +1,13 @@
+.manager-container {
+  .preview {
+    max-height: calc(100vh - 83px);
+    overflow-y: scroll;
+    .portfolio-item-thumb {
+      padding: 1vw;
+      .portfolio-item-img img {
+        width: 100%;
+        border-radius: 20px;
+      }
+    }
+  }
+}

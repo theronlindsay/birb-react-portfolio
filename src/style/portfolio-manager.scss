@@ -1,0 +1,13 @@
+.manager-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  .form {
+    height: calc(100vh - 83px);
+  }
+
+  .preview {
+    background-color: $brave-dark;
+    border-top-left-radius: 30px;
+  }
+}
