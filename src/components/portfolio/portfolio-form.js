@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { Text, TextArea } from 'grommet';
 import React, {Component} from 'react';
 
 export default class PortfolioForm extends Component{
@@ -38,7 +40,12 @@ export default class PortfolioForm extends Component{
     }
 
     handleSubmit(event){
-        this.buildForm();
+        axios.post("https://theronlindsay.devcamp.space/portfolio/portfolio_items", this.buildForm(), {withCredentials: true})
+        .then(response => {
+            console.log("response", response);
+        }).catch(error=> {
+            console.log("form submit error", error);
+        })
         event.preventDefault();
     }
 
@@ -52,10 +59,14 @@ export default class PortfolioForm extends Component{
                         <input type="text" name="name" placeholder="Portfolio Item Name" value={this.state.name} onChange={this.handleChange}/>
                         <input type="text" name="url" placeholder="URL" value={this.state.url} onChange={this.handleChange}/>
                         <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange}/>
-                        <input type="text" name="category" placeholder="Category" value={this.state.category} onChange={this.handleChange}/>
+                        <select name="category" placeholder="Category" value={this.state.category} onChange={this.handleChange}>
+                            <option value="eCommerce">eCommerce</option>
+                            <option value="Social">Social</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                     <div>
-                        <input type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
+                        <TextArea type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
                     </div>
                     <div>
                         <button type="submit">Save</button>
