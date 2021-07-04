@@ -9,9 +9,18 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
 
-  background-color: rgb(49, 52, 66);
+  background-color: $brave;
   color: white;
+  // padding-left: 5vw;
+  // padding-right: 5vw;
 }
+
 a {
   color: white;
+  text-decoration: none;
+}
+
+.containter {
+  display: grid;
+  grid-template-columns: 1fr;
 }

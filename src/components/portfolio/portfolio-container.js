@@ -19,7 +19,7 @@ export default class PortfolioContainer extends Component{
 
     getPortfolioItems(){
         axios
-      .get("https://theronlindsay.devcamp.space/portfolio/portfolio_items")
+      .get("https://theronlindsay.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc")
       .then(response => {
         // handle success
         console.log("response data", response);
@@ -72,12 +72,13 @@ export default class PortfolioContainer extends Component{
         // this.getPortfolioItems();
 
         return(
-            <div>
-                <button onClick ={() => this.handleFilter('eCommerce')}>eCommerce</button>
-                <button onClick ={() => this.handleFilter('Other')}>Other</button>
+            <div className="portfolioItemsContainer">
+
+                <button className="btn" onClick ={() => this.handleFilter('eCommerce')}>eCommerce</button>
+                <button className="btn" onClick ={() => this.handleFilter('Social')}>Social</button>
+                <button className="btn" onClick ={() => this.handleFilter('Other')}>Other</button>
 
                 {this.portfolioItems()}
-
             </div>
         )
     }
