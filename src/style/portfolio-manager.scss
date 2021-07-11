@@ -4,7 +4,13 @@
 
   .form {
     height: calc(100vh - 83px);
+    padding-right: 5vw;
     overflow-y: scroll;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .preview {

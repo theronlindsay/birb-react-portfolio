@@ -6,29 +6,51 @@
   @include input-element();
   @include textarea();
 
-  .additional-info {
-    padding-bottom: 15px;
+  #pos {
+    padding-top: 22px;
+  }
+
+  .MuiSvgIcon-root,
+  .muiSelect-icon {
+    color: white;
   }
 
   .text-area-wrapper {
     padding-bottom: 50px;
   }
-  //   Select {
-  //     font-family: "Fira Sans", sans-serif;
-  //     color: white;
-  //     padding: 5px 0px;
-  //     width: 100%;
-  //     border: 1px solid white;
-  //     background: $brave;
-  //     transition: 0.5s all ease-in-out;
-  //     font-size: 1em;
-  //     margin-bottom: 21px;
-  //     border-radius: 5px;
-  //     -webkit-appearance: none;
-  //     // -moz-appearance: none;
-  //     // appearance: none;
-  //     Paper {
-  //       background-color: $brave;
-  //     }
-  //   }
+
+  .img-uploaders {
+    padding-bottom: 22px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 50vw;
+
+    .dz-clickable {
+      width: 15vw;
+    }
+  }
+
+  .submit {
+    border-radius: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .dz-clickable {
+    background-color: $brave;
+    border: 2px solid white;
+  }
+
+  .dz-remove {
+    background-color: $brave;
+  }
+
+  .dz-preview.dz-image-preview {
+    background-color: $brave;
+  }
+}
+
+.MuiMenu-list {
+  background-color: $brave;
 }

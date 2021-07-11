@@ -9,18 +9,25 @@ import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
 const style = {
     Select: {
         border: 0,
-        background: '$brave',
         color: 'white',
         borderBottom: '1px solid white',
         selectRoot: {     color: "white"   },
+        fontFamily: '"Fira Sans", sans-serif',
     },
     FormControl: {
         color: 'white',
         width: '100%',
+        fontFamily: '"Fira Sans", sans-serif',
     },
     InputLabel: {
-        color: 'white',
+        color: '#A0A1A8',
+        fontFamily: '"Fira Sans", sans-serif',
     },
+    active: {
+        backgroundColor: 'rgb(49, 52, 66)',
+        color: 'white',
+        fontFamily: '"Fira Sans", sans-serif',
+    }
 }
 export default class PortfolioForm extends Component{
     
@@ -147,12 +154,12 @@ export default class PortfolioForm extends Component{
     render() {
         return(
                 <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
-                    <div>
+                    <div className="two-column">
                         <input type="text" name="name" placeholder="Portfolio Item Name" value={this.state.name} onChange={this.handleChange}/>
                         <input type="text" name="url" placeholder="URL" value={this.state.url} onChange={this.handleChange}/>
                     </div>
-                    <div className="additional-info">
-                        <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange}/>
+                    <div className="two-column">
+                        <input type="text" name="position" id="pos" placeholder="Position" value={this.state.position} onChange={this.handleChange}/>
                         
 
                         <FormControl style = {style.FormControl}>
@@ -166,9 +173,9 @@ export default class PortfolioForm extends Component{
                                     value={this.state.category}
                                     onChange={this.handleChange}
                                 >
-                                    <MenuItem value="eCommerce">eCommerce</MenuItem>
-                                    <MenuItem value="Social">Social</MenuItem>
-                                    <MenuItem value="Other">Other</MenuItem>
+                                    <MenuItem value="eCommerce" style = {style.active}>eCommerce</MenuItem>
+                                    <MenuItem value="Social" style = {style.active}>Social</MenuItem>
+                                    <MenuItem value="Other" style = {style.active}>Other</MenuItem>
                                 </Select>
                         </FormControl>
                     </div>
@@ -177,32 +184,38 @@ export default class PortfolioForm extends Component{
                     </div>
 
 
-                    <div className="img-uploaders">
+                    <div className="img-uploaders" id="upload">
                         <DropzoneComponent
                             ref={this.thumbRef}
                             config = {this.componentConfig()}
                             djsConfig = {this.djsConfig()}
                             eventHandlers = {this.handleThumbDrop()}
-                        />
+                        >
+                        <div className="dz-message">Thumbnail</div>
+                        </DropzoneComponent>
 
                         <DropzoneComponent
                             ref={this.bannerRef}
                             config = {this.componentConfig()}
                             djsConfig = {this.djsConfig()}
                             eventHandlers = {this.handleBannerDrop()}
-                        />
+                        >
+                            <div className="dz-message">Banner Image</div>
+                        </DropzoneComponent>
 
                         <DropzoneComponent
                             ref={this.logoRef}
                             config = {this.componentConfig()}
                             djsConfig = {this.djsConfig()}
                             eventHandlers = {this.handleLogoDrop()}
-                        />
+                        >
+                            <div className="dz-message">Logo image</div>
+                        </DropzoneComponent>
 
                     </div>
 
-                    <div>
-                        <button type="submit">Save</button>
+                    <div >
+                        <button className="btn submit" type="submit">Save</button>
                     </div>
                 </form>
         );
