@@ -1,12 +1,29 @@
 import axios from 'axios';
-import { Text, TextArea } from 'grommet';
 import React, {Component} from 'react';
 import { DropzoneComponent } from 'react-dropzone-component';
+import { InputLabel, Select, MenuItem, FormControl} from '@material-ui/core';
 
 import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
 import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
 
+const style = {
+    Select: {
+        border: 0,
+        background: '$brave',
+        color: 'white',
+        borderBottom: '1px solid white',
+        selectRoot: {     color: "white"   },
+    },
+    FormControl: {
+        color: 'white',
+        width: '100%',
+    },
+    InputLabel: {
+        color: 'white',
+    },
+}
 export default class PortfolioForm extends Component{
+    
     constructor(props){
         super(props);
 
@@ -19,22 +36,40 @@ export default class PortfolioForm extends Component{
             thumb_image: "",
             banner_image: "",
             logo: ""
-        };
+        };         
+
+        
 
         this.handleChange=this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentConfig = this.componentConfig.bind(this);
         this.djsConfig = this.djsConfig.bind(this);
         this.handleThumbDrop=this.handleThumbDrop.bind(this);
+        this.handleBannerDrop=this.handleBannerDrop.bind(this);
+        this.handleLogoDrop = this.handleLogoDrop.bind(this);
 
         this.thumbRef = React.createRef();
         this.bannerRef = React.createRef();
         this.logoRef = React.createRef();
     }
 
+    
+
     handleThumbDrop() {
         return{
             addedfile: file => this.setState({ thumb_image: file})
+        }
+    }
+
+    handleBannerDrop() {
+        return{
+            addedfile: file => this.setState({ banner_image: file})
+        }
+    }
+
+    handleLogoDrop() {
+        return{
+            addedfile: file => this.setState({ logo: file})
         }
     }
 
@@ -66,13 +101,22 @@ export default class PortfolioForm extends Component{
             formData.append("portfolio_item[thumb_image]", this.state.thumb_image);
         }
 
+        if(this.state.banner_image) {
+            formData.append("portfolio_item[banner_image]", this.state.banner_image);
+        }
+
+        if(this.state.logo) {
+            formData.append("portfolio_item[logo]", this.state.logo);
+        }
+
         return formData;
     }
 
     handleChange(event){
         this.setState({
             [event.target.name]: event.target.value
-        })
+        });
+        console.log("setState");
     }
 
     handleSubmit(event){
@@ -82,7 +126,7 @@ export default class PortfolioForm extends Component{
             this.setState({
                 name: "",
                 description: "",
-                category: "eCommerce",
+                category: "",
                 position: "",
                 url: "",
                 thumb_image: "",
@@ -99,54 +143,61 @@ export default class PortfolioForm extends Component{
         event.preventDefault();
     }
 
+
     render() {
         return(
-            <div>
-                <h1>PortfolioForm</h1>
-
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
                     <div>
                         <input type="text" name="name" placeholder="Portfolio Item Name" value={this.state.name} onChange={this.handleChange}/>
                         <input type="text" name="url" placeholder="URL" value={this.state.url} onChange={this.handleChange}/>
-                        <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange}/>
-                        <select name="category" placeholder="Category" value={this.state.category} onChange={this.handleChange}>
-                            <option value="eCommerce">eCommerce</option>
-                            <option value="Social">Social</option>
-                            <option value="Other">Other</option>
-                        </select>
                     </div>
-                    <div>
-                        <TextArea type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
+                    <div className="additional-info">
+                        <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange}/>
+                        
+
+                        <FormControl style = {style.FormControl}>
+                            <InputLabel id="Category" style = {style.InputLabel}>Category</InputLabel>
+                                <Select
+                                    disableUnderline
+                                    style = {style.Select}
+                                    labelId="Category"
+                                    id="Category"
+                                    name="category"
+                                    value={this.state.category}
+                                    onChange={this.handleChange}
+                                >
+                                    <MenuItem value="eCommerce">eCommerce</MenuItem>
+                                    <MenuItem value="Social">Social</MenuItem>
+                                    <MenuItem value="Other">Other</MenuItem>
+                                </Select>
+                        </FormControl>
+                    </div>
+                    <div className="text-area-wrapper">
+                        <textarea type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
                     </div>
 
 
                     <div className="img-uploaders">
                         <DropzoneComponent
-                        ref={this.thumbRef}
-                        config = {this.componentConfig()}
-                        djsConfig = {this.djsConfig()}
-                        eventHandlers = {this.handleThumbDrop()}
-                    >
-                        
-                    </DropzoneComponent>
+                            ref={this.thumbRef}
+                            config = {this.componentConfig()}
+                            djsConfig = {this.djsConfig()}
+                            eventHandlers = {this.handleThumbDrop()}
+                        />
 
-                    <DropzoneComponent
-                        ref={this.bannerRef}
-                        config = {this.componentConfig()}
-                        djsConfig = {this.djsConfig()}
-                        eventHandlers = {this.handleThumbDrop()}
-                    >
-                        
-                    </DropzoneComponent>
+                        <DropzoneComponent
+                            ref={this.bannerRef}
+                            config = {this.componentConfig()}
+                            djsConfig = {this.djsConfig()}
+                            eventHandlers = {this.handleBannerDrop()}
+                        />
 
-                    <DropzoneComponent
-                        ref={this.logoRef}
-                        config = {this.componentConfig()}
-                        djsConfig = {this.djsConfig()}
-                        eventHandlers = {this.handleThumbDrop()}
-                    >
-                        
-                    </DropzoneComponent>
+                        <DropzoneComponent
+                            ref={this.logoRef}
+                            config = {this.componentConfig()}
+                            djsConfig = {this.djsConfig()}
+                            eventHandlers = {this.handleLogoDrop()}
+                        />
 
                     </div>
 
@@ -154,7 +205,6 @@ export default class PortfolioForm extends Component{
                         <button type="submit">Save</button>
                     </div>
                 </form>
-            </div>
         );
     }
 }

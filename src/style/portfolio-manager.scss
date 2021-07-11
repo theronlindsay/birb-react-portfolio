@@ -4,6 +4,7 @@
 
   .form {
     height: calc(100vh - 83px);
+    overflow-y: scroll;
   }
 
   .preview {
