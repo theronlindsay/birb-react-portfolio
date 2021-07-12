@@ -2,8 +2,44 @@
   .preview {
     max-height: calc(100vh - 83px);
     overflow-y: scroll;
+    width: fit-content;
     .portfolio-item-thumb {
       padding: 1vw;
+
+      h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .side-context {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .delete,
+      .edit {
+        border-radius: 5px;
+        color: white;
+        padding: 5px 10px;
+        width: 5vh;
+        height: 2.5vh;
+        text-align: center;
+        background-color: $orange;
+
+        &:hover {
+          background-color: red;
+        }
+      }
+
+      .edit {
+        background-color: $lemon;
+
+        &:hover {
+          background-color: limegreen;
+        }
+      }
       .portfolio-item-img img {
         width: 100%;
         border-radius: 20px;

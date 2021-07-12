@@ -9,6 +9,10 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 21px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  place-content: center;
 }
 
 .three-column {

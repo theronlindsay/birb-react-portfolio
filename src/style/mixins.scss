@@ -32,7 +32,7 @@
     background-color: transparent;
     transition: 0.5s all ease-in-out;
     font-size: 1.1em;
-    margin-bottom: 21px;
+    padding-top: 22px;
 
     &:focus {
       outline: none;
@@ -58,6 +58,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin-top: 5vh;
 
     &:focus {
       outline: none;
