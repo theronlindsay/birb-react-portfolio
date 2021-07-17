@@ -3,11 +3,11 @@
   height: 3px;
 }
 ::-webkit-scrollbar-track-piece {
-  background-color: $brave-dark;
+  background-color: $brave;
 }
 ::-webkit-scrollbar-thumb {
   height: 50px;
-  background-color: $brave;
+  background-color: $brave-dark;
   border-radius: 20px;
 }
 

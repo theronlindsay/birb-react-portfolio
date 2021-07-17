@@ -6,10 +6,7 @@
     height: calc(100vh - 83px);
     padding-right: 2vw;
     scrollbar-width: 0px;
-
-    ::-webkit-scrollbar {
-      display: none;
-    }
+    overflow-y: scroll;
   }
 
   .preview {

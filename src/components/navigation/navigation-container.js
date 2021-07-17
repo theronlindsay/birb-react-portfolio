@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavigationComponent = (props) => {
 
-    const dynamicLink = (route, linkText)=>{
-        return(
-            <div className = "nav-link-wrapper">
+    const dynamicLink = (route, linkText) => {
+        return (
+            <div className="nav-link-wrapper">
                 <NavLink to={route} activeClassName="nav-link-active">
                     {linkText}
                 </NavLink>
@@ -17,8 +17,8 @@ const NavigationComponent = (props) => {
     }
 
     const handleSignOut = () => {
-        axios.delete("https://api.devcamp.space/logout", { withCredentials: true}).then(response => {
-            if(response.status === 200){
+        axios.delete("https://api.devcamp.space/logout", { withCredentials: true }).then(response => {
+            if (response.status === 200) {
                 props.history.push("/");
                 props.handleLogout();
             }
@@ -28,48 +28,48 @@ const NavigationComponent = (props) => {
         })
     }
 
-                    
 
-        return (
-            
-            <div className="nav-wrapper">
-                <div className="Links">
-                    <div className = "nav-link-wrapper">
-                        <NavLink exact to="/" activeClassName="nav-link-active">
-                            Home
-                        </NavLink>
-                    </div>
 
-                    <div className = "nav-link-wrapper">
-                        <NavLink to="/about-me" activeClassName="nav-link-active">
-                            About
-                        </NavLink>
-                    </div>
+    return (
 
-                    <div className = "nav-link-wrapper">
+        <div className="nav-wrapper">
+            <div className="Links">
+                <div className="nav-link-wrapper">
+                    <NavLink exact to="/" activeClassName="nav-link-active">
+                        Home
+                    </NavLink>
+                </div>
+
+                <div className="nav-link-wrapper">
+                    <NavLink to="/about-me" activeClassName="nav-link-active">
+                        About
+                    </NavLink>
+                </div>
+
+                {/* <div className = "nav-link-wrapper">
                         <NavLink to="/contact" activeClassName="nav-link-active">
                             Contact
                         </NavLink>
-                    </div>
+                    </div> */}
 
-                    <div className = "nav-link-wrapper">
-                        <NavLink to="/blog" activeClassName="nav-link-active">
-                            Blog
-                        </NavLink>
-                    </div>
-
-
-                    {props.loggedInStatus === "LOGGED_IN" ? dynamicLink("/portfolio-manager", "Portfolio Manager"):null}
+                <div className="nav-link-wrapper">
+                    <NavLink to="/blog" activeClassName="nav-link-active">
+                        Blog
+                    </NavLink>
                 </div>
 
-                <div className="Rightside">
-                    THERON LINDSAY
 
-                    {props.loggedInStatus === "LOGGED_IN" ? <a className="btn signout" onClick={handleSignOut}><FontAwesomeIcon icon="sign-out-alt"/></a>:null}
-                </div>
+                {props.loggedInStatus === "LOGGED_IN" ? dynamicLink("/portfolio-manager", "Portfolio Manager") : null}
             </div>
 
-        )
+            <div className="Rightside">
+                THERON LINDSAY
+
+                {props.loggedInStatus === "LOGGED_IN" ? <a className="btn signout" onClick={handleSignOut}><FontAwesomeIcon icon="sign-out-alt" /></a> : null}
+            </div>
+        </div>
+
+    )
 }
 
-    export default withRouter(NavigationComponent);
+export default withRouter(NavigationComponent);
