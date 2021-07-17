@@ -17,17 +17,28 @@
 
   .img-uploaders {
     padding-bottom: 22px;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+
+    .image-removal-link {
+      align-items: center;
+      justify-self: center;
+      .btn {
+        padding: 6px 20px;
+        color: white;
+      }
+    }
 
     .portfolio-manager-image-wrapper {
+      display: grid;
+      grid-template-rows: 2fr 0.2fr;
+      gap: 10px;
+      border: solid 3px white;
+      padding: 1vw;
+      border-radius: 20px;
       img {
-        width: 90%;
-        height: fit-content;
-        object-fit: cover;
         border-radius: 10px;
+        width: 100%;
+        object-fit: cover;
       }
     }
 

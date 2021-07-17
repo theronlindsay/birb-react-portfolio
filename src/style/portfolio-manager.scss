@@ -4,10 +4,8 @@
 
   .form {
     height: calc(100vh - 83px);
-    width: fit-content;
     padding-right: 2vw;
-    overflow-y: scroll;
-    scrollbar-width: none;
+    scrollbar-width: 0px;
 
     ::-webkit-scrollbar {
       display: none;

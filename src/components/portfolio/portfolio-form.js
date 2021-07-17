@@ -67,7 +67,7 @@ export default class PortfolioForm extends Component {
     }
 
     deleteImage(imageType) {
-        console.log("deleteImage", imageType)
+        console.log("deleteImage", imageType);
     }
 
     componentDidUpdate() {
@@ -191,7 +191,7 @@ export default class PortfolioForm extends Component {
                     logo: "",
                     editMode: false,
                     apiUrl: "https://theronlindsay.devcamp.space/portfolio/portfolio_items",
-                    apiAction: 'post',
+                    apiAction: "post",
                 });
 
                 [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
@@ -239,13 +239,13 @@ export default class PortfolioForm extends Component {
                 </div>
 
 
-                <div className="img-uploaders" id="upload">
+                <div className="img-uploaders three-column" id="upload">
                     {this.state.thumb_image && this.state.editMode ? (
                         <div className="portfolio-manager-image-wrapper">
-                            <img src={this.state.thumb_image} />
+                            <div><img src={this.state.thumb_image} /></div>
 
-                            <div className="btn image-removal-link">
-                                <a onClick={() => this.deleteImage("thumb_image")}><FontAwesomeIcon icon="trash" /></a>
+                            <div className="image-removal-link">
+                                <a className="btn" onClick={() => this.deleteImage("thumb_image")}><FontAwesomeIcon icon="trash" /></a>
                             </div>
                         </div>
                     ) : (
@@ -262,7 +262,11 @@ export default class PortfolioForm extends Component {
 
                     {this.state.banner_image && this.state.editMode ? (
                         <div className="portfolio-manager-image-wrapper">
-                            <img src={this.state.banner_image} />
+                            <div><img src={this.state.banner_image} /></div>
+
+                            <div className="image-removal-link">
+                                <a className="btn" onClick={() => this.deleteImage("banner_image")}><FontAwesomeIcon icon="trash" /></a>
+                            </div>
                         </div>
                     ) : (
 
@@ -280,7 +284,11 @@ export default class PortfolioForm extends Component {
 
                     {this.state.logo && this.state.editMode ? (
                         <div className="portfolio-manager-image-wrapper">
-                            <img src={this.state.logo} />
+                            <div><img src={this.state.logo} /></div>
+
+                            <div className="image-removal-link">
+                                <a className="btn" onClick={() => this.deleteImage("logo")}><FontAwesomeIcon icon="trash" /></a>
+                            </div>
                         </div>
                     ) : (
 
