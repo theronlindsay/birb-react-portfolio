@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
+import { faTrash, faSignOutAlt, faEdit, faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
@@ -20,7 +20,7 @@ import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
 import NoMatch from "./pages/nomatch";
 
-library.add(faTrash, faSignOutAlt, faEdit);
+library.add(faTrash, faSignOutAlt, faEdit, faSpinner);
 
 export default class App extends Component {
 

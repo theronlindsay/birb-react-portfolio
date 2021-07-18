@@ -8,6 +8,14 @@
     flex-direction: column;
     width: 800px;
 
+    a {
+      transition: 0.5s ease-in-out;
+
+      &:hover {
+        color: $lemon;
+      }
+    }
+
     .featured-image-wrapper {
       img {
         margin: 15px 0px;

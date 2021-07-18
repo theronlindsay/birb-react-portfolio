@@ -5,12 +5,12 @@
   .form {
     height: calc(100vh - 83px);
     padding-right: 2vw;
-    scrollbar-width: 0px;
     overflow-y: scroll;
+    background-color: $brave-dark;
   }
 
   .preview {
     background-color: $brave-dark;
-    border-top-left-radius: 30px;
+    height: 100%;
   }
 }

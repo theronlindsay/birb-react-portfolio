@@ -28,6 +28,10 @@
         text-align: center;
         background-color: $orange;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         &:hover {
           background-color: red;
         }
