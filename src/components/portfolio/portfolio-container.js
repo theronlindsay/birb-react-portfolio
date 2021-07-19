@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PortfolioItem from "./portfolio-item";
 import axios from 'axios';
 
-export default class PortfolioContainer extends Component{
-    constructor(){
+export default class PortfolioContainer extends Component {
+    constructor() {
         super()
 
         this.state = {
@@ -14,29 +14,29 @@ export default class PortfolioContainer extends Component{
         console.log("Portfolio Cointainer has rendered!");
 
         this.handleFilter = this.handleFilter.bind(this);
-        this.getPortfolioItems= this.getPortfolioItems.bind(this);
+        this.getPortfolioItems = this.getPortfolioItems.bind(this);
     }
 
-    getPortfolioItems(){
+    getPortfolioItems() {
         axios
-      .get("https://theronlindsay.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc")
-      .then(response => {
-        // handle success
-        console.log("response data", response);
-        this.setState({
-            data: response.data.portfolio_items
-        })
-      })
-      .catch(error => {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
+            .get("https://theronlindsay.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc")
+            .then(response => {
+                // handle success
+                console.log("response data", response);
+                this.setState({
+                    data: response.data.portfolio_items
+                })
+            })
+            .catch(error => {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
     }
 
-    handleFilter(filter){
+    handleFilter(filter) {
         this.setState({
             data: this.state.data.filter(item => {
                 return item.category === filter;
@@ -44,39 +44,39 @@ export default class PortfolioContainer extends Component{
         })
     }
 
-    portfolioItems(){
+    portfolioItems() {
         // Background image = thumb_image_url
         // Logo = logo_url
         // Description
         // id for slug = id
         return this.state.data.map(item => {
-            return <PortfolioItem 
-            key={item.id} 
-            item = {item}
+            return <PortfolioItem
+                key={item.id}
+                item={item}
             />;
         })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getPortfolioItems();
     }
 
-    render(){
+    render() {
 
-        
 
-        if(this.state.isLoading){
+
+        if (this.state.isLoading) {
             return <div>Loading...</div>
         }
 
         // this.getPortfolioItems();
 
-        return(
+        return (
             <div className="portfolioItemsContainer">
 
-                <button className="btn" onClick ={() => this.handleFilter('eCommerce')}>eCommerce</button>
-                <button className="btn" onClick ={() => this.handleFilter('Social')}>Social</button>
-                <button className="btn" onClick ={() => this.handleFilter('Other')}>Other</button>
+                <button className="btn" onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
+                <button className="btn" onClick={() => this.handleFilter('Social')}>Social</button>
+                <button className="btn" onClick={() => this.handleFilter('Other')}>Other</button>
 
                 {this.portfolioItems()}
             </div>
