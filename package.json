@@ -1,5 +1,5 @@
 {
-  "name": "Birb's Portfolio",
+  "name": "birb-react-portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio App built in React",
   "scripts": {
