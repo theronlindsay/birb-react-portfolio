@@ -36,6 +36,25 @@
     justify-content: center;
     border-bottom: 3vh solid transparent;
     margin-top: 2vh;
+    img {
+      width: 70vw;
+    }
+
+    .portfolio-manager-image-wrapper {
+      .image-removal-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a {
+          text-align: center;
+          align-items: center;
+          justify-self: center;
+          padding: 0vh 4vw;
+          padding-top: 2vh;
+        }
+      }
+    }
   }
 
   .dz-clickable {

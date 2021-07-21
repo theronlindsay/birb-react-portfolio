@@ -1,0 +1,35 @@
+.rdw-image-modal {
+  left: -215px;
+}
+
+.rdw-emoji-modal {
+  left: -169px;
+}
+
+.rdw-embedded-modal {
+  left: -124px;
+}
+
+.rdw-embedded-modal-btn,
+.rdw-image-modal-btn {
+  @include base-btn();
+}
+
+.rdw-dropdown-selectedtext,
+.rdw-dropdown-carettoopen,
+.rdw-dropdown-optionwrapper,
+.rdw-dropdown-wrapper,
+.rdw-dropdown {
+  img {
+    filter: invert(100%) sepia(11%) saturate(1425%) hue-rotate(253deg)
+      brightness(115%) contrast(100%);
+  }
+}
+
+.rdw-dropdown-carettoclose {
+  border-bottom-color: white;
+}
+
+.rdw-dropdown-carettoopen {
+  border-top-color: white;
+}
