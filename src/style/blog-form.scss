@@ -28,6 +28,10 @@
   .two-column {
     padding-bottom: 4vh;
     place-content: space-evenly;
+
+    .input-element {
+      width: 30vw;
+    }
   }
 
   .img-uploaders {

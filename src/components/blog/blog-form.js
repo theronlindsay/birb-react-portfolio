@@ -4,6 +4,31 @@ import RichTextEditor from "../forms/rich-text-editor";
 import DropzoneComponent from "react-dropzone-component";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
+
+const style = {
+    Select: {
+        border: 0,
+        color: 'white',
+        borderBottom: '1px solid white',
+        selectRoot: { color: "white" },
+        fontFamily: '"Fira Sans", sans-serif',
+    },
+    FormControl: {
+        color: 'white',
+        width: '100%',
+        fontFamily: '"Fira Sans", sans-serif',
+    },
+    InputLabel: {
+        color: '#A0A1A8',
+        fontFamily: '"Fira Sans", sans-serif',
+    },
+    active: {
+        backgroundColor: 'rgb(49, 52, 66)',
+        color: 'white',
+        fontFamily: '"Fira Sans", sans-serif',
+    }
+}
 
 export default class BlogForm extends Component {
     constructor(props) {
@@ -146,8 +171,21 @@ export default class BlogForm extends Component {
                         </div>
 
                         <div className="input-element">
-                            <input onChange={this.handleChange} type="text" name="blog_status" placeholder="Blog Status" value={this.state.blog_status} />
-
+                            <FormControl style={style.FormControl}>
+                                <InputLabel id="Status" style={style.InputLabel}>Status</InputLabel>
+                                <Select
+                                    disableUnderline
+                                    style={style.Select}
+                                    labelId="Status"
+                                    id="Status"
+                                    name="blog_status"
+                                    value={this.state.blog_status}
+                                    onChange={this.handleChange}
+                                >
+                                    <MenuItem value="published" style={style.active}>Published</MenuItem>
+                                    <MenuItem value="draft" style={style.active}>Draft</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                     </div>
 

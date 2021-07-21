@@ -12,5 +12,12 @@
     justify-content: center;
     align-items: center;
     background-color: $brave-dark;
+    @include input-element;
+
+    button {
+      @include base-btn;
+      margin-top: 1.5vh;
+      border-radius: 15px;
+    }
   }
 }

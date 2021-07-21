@@ -1,60 +1,75 @@
-.portfolioItemsContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  background-color: $brave;
-
-  .portfolioItem {
+.portfolio-wrapper {
+  .filters {
     display: flex;
-    position: relative;
+    padding: 0px 5vw;
     align-items: center;
-    justify-content: center;
-    // padding: 0.5vw;
-
-    .portfolioImgBackground {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 350px;
-      width: 100%;
-      border-radius: 40px;
+    justify-content: space-evenly;
+    justify-self: center;
+    align-self: center;
+    border-bottom: 5vh solid transparent;
+    .btn {
+      padding: 0px 9vw;
     }
+  }
 
-    .imgText {
-      position: absolute;
-      top: 0;
+  .portfolioItemsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    background-color: $brave;
+
+    .portfolioItem {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      position: relative;
       align-items: center;
-      height: 100%;
-      text-align: center;
-      padding-left: 100px;
-      padding-right: 100px;
+      justify-content: center;
+      // padding: 0.5vw;
 
-      &:hover .subtitle {
-        color: $orange;
-        font-weight: 400;
+      .portfolioImgBackground {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 350px;
+        width: 100%;
+        border-radius: 40px;
       }
 
-      .subtitle {
-        transition: 1s ease-in-out;
-        color: transparent;
-      }
-
-      .logoWrapper img {
-        width: 50%;
-        margin-bottom: 20px;
+      .imgText {
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100%;
+        text-align: center;
+        padding-left: 100px;
+        padding-right: 100px;
+
+        &:hover .subtitle {
+          color: $orange;
+          font-weight: 400;
+        }
+
+        .subtitle {
+          transition: 1s ease-in-out;
+          color: transparent;
+        }
+
+        .logoWrapper img {
+          width: 50%;
+          margin-bottom: 20px;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
   }
-}
 
-.image-blur {
-  transition: 1s;
-  filter: brightness(10%);
+  .image-blur {
+    transition: 1s;
+    filter: brightness(10%);
+  }
 }

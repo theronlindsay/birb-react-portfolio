@@ -1,0 +1,21 @@
+.about-wrapper {
+  width: 100vw;
+  height: calc(100vh - 83px);
+  display: grid;
+  gap: 5vw 5vh;
+  grid-template-columns: 1fr 1fr;
+  .about-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+  }
+  .about-content {
+    border-right: 2vw solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      font-size: small;
+    }
+  }
+}
