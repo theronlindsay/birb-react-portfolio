@@ -1,12 +1,62 @@
 .blog-form-wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  padding: 42px;
-
+  overflow-x: hidden;
+  width: 100%;
   @include input-element();
   @include textarea();
+
+  .one-column {
+    .demo-editor {
+      border: 1px solid white;
+      border-top: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      height: 20vh;
+      width: 100%;
+      max-height: none;
+      overflow-x: scroll;
+
+      .DraftEditor-root {
+        .public-DraftStyleDefault-block {
+          width: 100%;
+        }
+      }
+    }
+  }
+
   .two-column {
     padding-bottom: 4vh;
     place-content: space-evenly;
+  }
+
+  .img-uploaders {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3vh solid transparent;
+    margin-top: 2vh;
+  }
+
+  .dz-clickable {
+    width: fit-content;
+    padding: 0px 4vw;
+  }
+
+  .submit {
+    border-radius: 8px;
+  }
+
+  .dz-clickable {
+    background-color: $brave;
+    border: 2px solid white;
+  }
+
+  .dz-remove {
+    background-color: $brave;
+  }
+
+  .dz-preview.dz-image-preview {
+    background-color: $brave;
   }
 }
