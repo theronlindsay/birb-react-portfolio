@@ -2,6 +2,9 @@
   "name": "birb-react-portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio App built in React",
+  "engines": {
+    "node": "14.17.3"
+  },
   "scripts": {
     "preinstall": "npm set audit false",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
