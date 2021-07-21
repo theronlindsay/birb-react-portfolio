@@ -39,6 +39,15 @@
     img {
       width: 70vw;
     }
+    .dropzone {
+      .dz-preview {
+        .dz-image {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
 
     .portfolio-manager-image-wrapper {
       .image-removal-link {

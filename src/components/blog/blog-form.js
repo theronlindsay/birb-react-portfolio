@@ -87,7 +87,7 @@ export default class BlogForm extends Component {
         formData.append("portfolio_blog[title]", this.state.title);
         formData.append("portfolio_blog[blog_status]", this.state.blog_status);
         formData.append("portfolio_blog[content]", this.state.content);
-        if (this.featured_image) {
+        if (this.state.featured_image) {
             formData.append("portfolio_blog[featured_image]", this.state.featured_image);
         }
 
@@ -107,7 +107,6 @@ export default class BlogForm extends Component {
                 if (this.state.featured_image) {
                     this.featuredImageRef.current.dropzone.removeAllFiles();
                 }
-                debugger;
 
                 this.setState({
                     title: "",
