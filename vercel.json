@@ -14,10 +14,5 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "functions": {
-    "server.js": {
-      "runtime": "nodejs16.x"
-    }
-  }
+  ]
 }
