@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personal Portfolio App built in React",
   "engines": {
-    "node": "22.x"
+    "node": "16.x"
   },
   "scripts": {
     "preinstall": "npm set audit false",
@@ -67,7 +67,7 @@
     "html-loader": "^0.5.5",
     "html-to-draftjs": "^1.5.0",
     "html-webpack-plugin": "^3.2.0",
-    "immutable": "^5.1.2",
+    "immutable": "^4.0.0",
     "moment": "^2.29.1",
     "node-sass": "^4.13.1",
     "polished": "^4.1.3",
