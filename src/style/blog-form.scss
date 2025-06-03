@@ -1,8 +1,14 @@
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
 .blog-form-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   overflow-x: hidden;
   width: 100%;
+  padding: 30px;
+  gap: 25px;
+
   @include input-element();
   @include textarea();
 
@@ -12,7 +18,7 @@
       border-top: none;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      height: 20vh;
+      height: 25vh;
       width: 100%;
       max-height: none;
       overflow-x: scroll;
@@ -26,11 +32,13 @@
   }
 
   .two-column {
-    padding-bottom: 4vh;
-    place-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
 
     .input-element {
-      width: 30vw;
+      width: 100%;
     }
   }
 
@@ -38,50 +46,64 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 3vh solid transparent;
-    margin-top: 2vh;
-    img {
-      width: 70vw;
-    }
-    .dropzone {
-      .dz-preview {
-        .dz-image {
-          img {
-            width: 100%;
-          }
-        }
-      }
-    }
+    margin: 30px 0;
 
     .portfolio-manager-image-wrapper {
-      .image-removal-link {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 15px;
+      border: solid 3px white;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      max-width: 400px;
+
+      img {
         width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .image-removal-link {
         display: flex;
         align-items: center;
         justify-content: center;
-        a {
-          text-align: center;
-          align-items: center;
-          justify-self: center;
-          padding: 0vh 4vw;
-          padding-top: 2vh;
+
+        .btn {
+          padding: 8px 16px;
+          min-width: 120px;
         }
+      }
+    }
+
+    .dz-clickable {
+      min-width: 300px;
+      min-height: 200px;
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: $primary-blue;
+        background-color: rgba(74, 144, 226, 0.1);
       }
     }
   }
 
-  .dz-clickable {
-    width: fit-content;
-    padding: 0px 4vw;
+  .submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
   }
 
-  .submit {
-    border-radius: 8px;
-  }
-
-  .dz-clickable {
-    background-color: $brave;
-    border: 2px solid white;
+  .btn {
+    padding: 12px 32px;
+    min-width: 150px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .dz-remove {
@@ -90,5 +112,120 @@
 
   .dz-preview.dz-image-preview {
     background-color: $brave;
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .blog-form-wrapper {
+    padding: 25px;
+    gap: 20px;
+
+    .one-column .demo-editor {
+      height: 22vh;
+    }
+
+    .img-uploaders {
+      margin: 25px 0;
+
+      .portfolio-manager-image-wrapper {
+        max-width: 350px;
+        padding: 15px;
+
+        img {
+          height: 200px;
+        }
+      }
+
+      .dz-clickable {
+        min-width: 250px;
+        min-height: 180px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-form-wrapper {
+    padding: 20px 15px;
+    gap: 18px;
+
+    .two-column {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .one-column .demo-editor {
+      height: 20vh;
+    }
+
+    .img-uploaders {
+      margin: 20px 0;
+      flex-direction: column;
+
+      .portfolio-manager-image-wrapper {
+        max-width: 100%;
+        width: 100%;
+        padding: 15px;
+
+        img {
+          height: 220px;
+        }
+      }
+
+      .dz-clickable {
+        width: 100%;
+        min-width: auto;
+        min-height: 200px;
+      }
+    }
+
+    .submit-wrapper {
+      margin-top: 25px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-form-wrapper {
+    padding: 15px 10px;
+    gap: 15px;
+
+    .one-column .demo-editor {
+      height: 18vh;
+    }
+
+    .img-uploaders {
+      margin: 15px 0;
+
+      .portfolio-manager-image-wrapper {
+        padding: 12px;
+
+        img {
+          height: 180px;
+        }
+
+        .image-removal-link .btn {
+          padding: 6px 12px;
+          min-width: 100px;
+          font-size: 0.9rem;
+        }
+      }
+
+      .dz-clickable {
+        min-height: 160px;
+      }
+    }
+
+    .btn {
+      padding: 12px 16px;
+      font-size: 0.95rem;
+    }
   }
 }

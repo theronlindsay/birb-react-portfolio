@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 .rdw-option-wrapper {
   border: 1px solid $brave-dark;
   padding: 5px;
@@ -1029,4 +1031,125 @@
 }
 .public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {
   counter-reset: ol4;
+}
+
+/**
+ * Responsive design for React Draft WYSIWYG
+ */
+@media (max-width: 768px) {
+  .rdw-editor-toolbar {
+    padding: 4px 3px 0;
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .rdw-option-wrapper {
+    min-width: 20px;
+    height: 18px;
+    padding: 3px;
+    margin: 0 2px;
+  }
+
+  .rdw-dropdown-wrapper {
+    height: 26px;
+    margin: 0 2px;
+    font-size: 12px;
+  }
+
+  .rdw-dropdown-optionwrapper {
+    font-size: 12px;
+    max-height: 200px;
+  }
+
+  .rdw-image-modal,
+  .rdw-emoji-modal,
+  .rdw-embedded-modal,
+  .rdw-link-modal,
+  .rdw-colorpicker-modal {
+    width: 250px;
+    max-width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    top: 20px;
+    z-index: 1000;
+  }
+
+  .rdw-inline-dropdown,
+  .rdw-block-dropdown,
+  .rdw-fontsize-dropdown,
+  .rdw-fontfamily-dropdown,
+  .rdw-list-dropdown,
+  .rdw-text-align-dropdown,
+  .rdw-history-dropdown,
+  .rdw-link-dropdown {
+    width: auto;
+    min-width: 35px;
+  }
+
+  .rdw-fontfamily-dropdown {
+    width: 80px;
+  }
+
+  .rdw-block-dropdown {
+    width: 75px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rdw-editor-toolbar {
+    padding: 3px 2px 0;
+    font-size: 12px;
+    gap: 1px;
+  }
+
+  .rdw-option-wrapper {
+    min-width: 18px;
+    height: 16px;
+    padding: 2px;
+    margin: 0 1px;
+  }
+
+  .rdw-dropdown-wrapper {
+    height: 24px;
+    margin: 0 1px;
+    font-size: 11px;
+  }
+
+  .rdw-image-modal,
+  .rdw-emoji-modal,
+  .rdw-embedded-modal,
+  .rdw-link-modal,
+  .rdw-colorpicker-modal {
+    width: 200px;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .rdw-fontfamily-dropdown {
+    width: 60px;
+  }
+
+  .rdw-block-dropdown {
+    width: 55px;
+  }
+
+  .rdw-colorpicker-modal {
+    width: 160px;
+    height: 150px;
+  }
+
+  .rdw-emoji-modal {
+    width: 200px;
+    height: 150px;
+  }
+
+  .rdw-embedded-modal-btn,
+  .rdw-image-modal-btn,
+  .rdw-link-modal-btn {
+    width: 60px;
+    height: 26px;
+    font-size: 11px;
+  }
 }

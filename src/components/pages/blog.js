@@ -91,29 +91,30 @@ class Blog extends Component {
         window.removeEventListener("scroll", this.onScroll, false);
     }
 
-    render() {
-        const blogRecords = this.state.blogItems.map(blogItem => {
+    render() {        const blogRecords = this.state.blogItems.map(blogItem => {
             if (this.props.loggedInStatus === "LOGGED_IN") {
                 return (
                     <div key={blogItem.id} className="admin-blog-wrapper">
                         <BlogItem blogItem={blogItem} />
-                        <a onClick={() => this.handleDeleteClick(blogItem)}><FontAwesomeIcon icon="trash" /></a>
+                        <a onClick={() => this.handleDeleteClick(blogItem)}>
+                            <FontAwesomeIcon icon="trash" />
+                        </a>
                     </div>
                 )
             } else {
                 return <BlogItem key={blogItem.id} blogItem={blogItem} />
             }
-
         });
 
         return (
             <div className="blog-container">
                 <BlogModal modalIsOpen={this.state.blogModalIsOpen}
                     handleModalClose={this.handleModalClose}
-                    handleSuccessfulBlogSubmission={this.handleSuccessfulNewBlogSubmission} />
-                {this.props.loggedInStatus === "LOGGED_IN" ? (
+                    handleSuccessfulBlogSubmission={this.handleSuccessfulNewBlogSubmission} />                {this.props.loggedInStatus === "LOGGED_IN" ? (
                     <div className="new-blog-link">
-                        <a className="btn" onClick={this.handleNewBlogClick}><FontAwesomeIcon icon="plus-circle"></FontAwesomeIcon></a>
+                        <a className="btn new-blog-btn" onClick={this.handleNewBlogClick}>
+                            <FontAwesomeIcon icon="plus-circle" />
+                        </a>
                     </div>
                 ) : null}
                 <div className="content-container">

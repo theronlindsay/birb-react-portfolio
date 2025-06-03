@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import RichTextEditor from "../forms/rich-text-editor";
-import DropzoneComponent from "react-dropzone-component";
+import DropzoneComponent from 'react-dropzone-component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
+import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 
 const style = {
     Select: {
@@ -212,10 +212,11 @@ export default class BlogForm extends Component {
                             >
                                 <div className="dz-message">Featured Image</div>
                             </DropzoneComponent>
-                        )}
-                    </div>
+                        )}                    </div>
 
-                    <button className="btn">Save</button>
+                    <div className="submit-wrapper">
+                        <button className="btn submit">Save</button>
+                    </div>
                 </form>
             </div>
         );

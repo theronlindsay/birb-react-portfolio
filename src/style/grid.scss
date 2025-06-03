@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 .one-column {
   display: grid;
   grid-template-columns: 1fr;
@@ -9,14 +11,59 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 21px;
   width: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  place-content: center;
+
+  // Better button spacing
+  .btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }
 
 .three-column {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 21px;
+  align-items: center;
+
+  // Better button spacing for three column layouts
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+// Responsive grid system
+@media (max-width: 768px) {
+  .two-column {
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+  }
+
+  .three-column {
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+
+    .btn-group {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .one-column,
+  .two-column,
+  .three-column {
+    grid-gap: 12px;
+  }
+
+  .btn-group {
+    gap: 8px;
+  }
 }

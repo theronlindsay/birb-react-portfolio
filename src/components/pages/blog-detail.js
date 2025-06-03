@@ -1,91 +1,74 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import ReactHtmlParser from 'react-html-parser'
+import parse from 'html-react-parser'
 
 import BlogForm from "../blog/blog-form";
-export default class BlogDetail extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            currentId: this.props.match.params.slug,
-            blogItem: {},
-            editMode: false
-        }
+export default function BlogDetail({ loggedInStatus }) {
+    const { slug } = useParams();
+    const [blogItem, setBlogItem] = useState({});
+    const [editMode, setEditMode] = useState(false);
 
-        this.handleEditClick = this.handleEditClick.bind(this);
-        this.handleFeaturedImageDelete = this.handleFeaturedImageDelete.bind(this);
-        this.handleUpdateFormSubmission = this.handleUpdateFormSubmission.bind(this);
+    const handleUpdateFormSubmission = (blog) => {
+        setBlogItem(blog);
+        setEditMode(false);
     }
 
-    handleUpdateFormSubmission(blog) {
-        this.setState({
-            blogItem: blog,
-            editMode: false
-        })
+    const handleFeaturedImageDelete = () => {
+        setBlogItem({
+            ...blogItem,
+            featured_image_url: "",
+        });
     }
 
-    handleFeaturedImageDelete() {
-        this.setState({
-            blogItem: {
-                featured_image_url: "",
-            }
-        })
-    }
-
-    handleEditClick() {
-        if (this.props.loggedInStatus === "LOGGED_IN") {
+    const handleEditClick = () => {
+        if (loggedInStatus === "LOGGED_IN") {
             console.log("handle edit click");
-            this.setState({ editMode: true })
+            setEditMode(true);
         }
     }
 
-    getBlogItem() {
-        axios.get(`https://theronlindsay.devcamp.space/portfolio/portfolio_blogs/${this.state.currentId}`)
+    const getBlogItem = () => {
+        axios.get(`https://theronlindsay.devcamp.space/portfolio/portfolio_blogs/${slug}`)
             .then(response => {
-                this.setState({
-                    blogItem: response.data.portfolio_blog
-                })
+                setBlogItem(response.data.portfolio_blog);
             }).catch(error => {
                 console.log("getBlogItem error", error)
             });
     }
 
-    componentDidMount() {
-        this.getBlogItem();
-    }
+    useEffect(() => {
+        getBlogItem();
+    }, [slug]);    const {
+        title,
+        content,
+        featured_image_url,
+        blog_status
+    } = blogItem;
 
-    render() {
-        const {
-            title,
-            content,
-            featured_image_url,
-            blog_status
-        } = this.state.blogItem;
+    const contentManager = () => {
+        if (editMode) {
+            return <BlogForm handleFeaturedImageDelete={handleFeaturedImageDelete} handleUpdateFormSubmission={handleUpdateFormSubmission} editMode={editMode} blog={blogItem} />;
+        } else {
+            return (
+                <div className="content-container">
+                    <h1 onClick={handleEditClick}>{title}</h1>
 
-        const contentManager = () => {
-            if (this.state.editMode) {
-                return <BlogForm handleFeaturedImageDelete={this.handleFeaturedImageDelete} handleUpdateFormSubmission={this.handleUpdateFormSubmission} editMode={this.state.editMode} blog={this.state.blogItem} />;
-            } else {
-                return (
-                    <div className="content-container">
-                        <h1 onClick={this.handleEditClick}>{title}</h1>
+                    {featured_image_url ? (
+                        <div className="featured-image-wrapper">
+                            <img src={featured_image_url} />
+                        </div>) : (null)}
 
-                        {featured_image_url ? (
-                            <div className="featured-image-wrapper">
-                                <img src={featured_image_url} />
-                            </div>) : (null)}
+                    <div className="content">{parse(content || '')}</div>
+                </div>
+            );
+        }
+    };
 
-                        <div className="content">{ReactHtmlParser(content)}</div>
-                    </div>
-                );
-            }
-        };
-
-        return (
-            <div className="blog-container">
-                {contentManager()}
-            </div>
-        );
-    }
+    return (
+        <div className="blog-container">
+            {contentManager()}
+        </div>
+    );
 }

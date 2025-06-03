@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
@@ -11,22 +15,225 @@
 
 .Links {
   display: flex;
+  position: relative;
+  background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+  border-radius: 50px;
+  padding: 8px;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  .nav-pill-selector {
+    position: absolute;
+    top: 8px;
+    height: calc(100% - 16px);
+    background: linear-gradient(145deg, $primary-blue, color.adjust($primary-blue, $lightness: -10%));
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+    box-shadow: 
+      0 4px 15px rgba(74, 144, 226, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      border-radius: 50px;
+    }
+  }
 }
 
 .nav-link-wrapper {
-  height: 22px;
-  border-bottom: 1px solid transparent;
-  transition: 0.5s ease-in-out;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  transition: all 0.3s ease;
 
-  margin-right: 20px;
-  text-transform: uppercase;
-  //   font-size: 0.9em;
+  a {
+    display: block;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9em;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
 
-  &:hover {
-    border-bottom: 1px solid white;
+    &:hover {
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    &.nav-link-active {
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
   }
 
-  .nav-link-active {
-    border-bottom: 4px solid white;
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Responsive styles for mobile
+@media (max-width: 768px) {
+  .nav-wrapper {
+    padding: 20px 15px;
+    flex-direction: column;
+    gap: 20px;
+    
+    .Rightside {
+      text-align: center;
+      font-size: 0.9em;
+    }
+  }
+
+  .Links {
+    align-self: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .nav-pill-selector {
+      display: none; // Hide animated pill on mobile for better UX
+    }
+  }
+
+  .nav-link-wrapper {
+    a {
+      padding: 10px 16px;
+      font-size: 0.85em;
+    }
+  }
+}
+
+// Mobile navigation - bottom navbar for phones
+@media (max-width: 480px) {
+  .nav-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(145deg, rgba(42, 42, 42, 0.95), rgba(30, 30, 30, 0.95));
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 0 0;
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.3);
+    
+    .Rightside {
+      order: -1; // Move to top
+      text-align: center;
+      font-size: 0.8em;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .Links {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 5px;
+    
+    .nav-pill-selector {
+      display: none;
+    }
+  }
+
+  .nav-link-wrapper {
+    flex: 1;
+    
+    a {
+      padding: 12px 8px;
+      font-size: 0.75em;
+      text-align: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      
+      &:hover, &.nav-link-active {
+        background: linear-gradient(145deg, $primary-blue, color.adjust($primary-blue, $lightness: -10%));
+        border-color: $primary-blue;
+        transform: translateY(-2px);
+      }
+    }  }
+}
+
+// Mobile navigation - bottom navbar for phones
+@media (max-width: 480px) {
+  .nav-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(145deg, rgba(42, 42, 42, 0.95), rgba(30, 30, 30, 0.95));
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 0 0;
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.3);
+    
+    .Rightside {
+      order: -1; // Move to top
+      text-align: center;
+      font-size: 0.8em;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .Links {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 5px;
+    
+    .nav-pill-selector {
+      display: none;
+    }
+  }
+
+  .nav-link-wrapper {
+    flex: 1;
+    
+    a {
+      padding: 12px 8px;
+      font-size: 0.75em;
+      text-align: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      
+      &:hover, &.nav-link-active {
+        background: linear-gradient(145deg, $primary-blue, color.adjust($primary-blue, $lightness: -10%));
+        border-color: $primary-blue;
+        transform: translateY(-2px);
+      }
+    }
   }
 }

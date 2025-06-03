@@ -1,3 +1,135 @@
+@use "sass:color";
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
 .btn {
+  @include base-btn();
+  // Primary button (blue highlight)
+  &.primary {
+    background: linear-gradient(145deg, $primary-blue, color.adjust($primary-blue, $lightness: -10%));
+    box-shadow: 
+      0 4px 15px rgba(74, 144, 226, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: linear-gradient(145deg, color.adjust($primary-blue, $lightness: 5%), $primary-blue);
+      box-shadow: 
+        0 8px 25px rgba(74, 144, 226, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  // Secondary button (outline style with dark base)
+  &.secondary {
+    background: transparent;
+    border-color: $primary-blue;
+    color: $primary-blue;
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.2),
+      inset 0 0 0 2px $primary-blue;
+      &:hover {
+      background: linear-gradient(145deg, $primary-blue, color.adjust($primary-blue, $lightness: -10%));
+      color: white;
+      box-shadow: 
+        0 8px 25px rgba(74, 144, 226, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+  }
+  // Edit button (accent blue variant)
+  &.edit {
+    background: linear-gradient(145deg, $accent-blue, color.adjust($accent-blue, $lightness: -10%));
+    color: white;
+    box-shadow: 
+      0 4px 15px rgba(108, 177, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: linear-gradient(145deg, color.adjust($accent-blue, $lightness: 5%), $accent-blue);
+      box-shadow: 
+        0 8px 25px rgba(108, 177, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  // Delete button (red variant)
+  &.delete {
+    background: linear-gradient(145deg, #ff4757, #ff3742);
+    box-shadow: 
+      0 4px 15px rgba(255, 71, 87, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: linear-gradient(145deg, #ff6b7a, #ff4757);
+      box-shadow: 
+        0 8px 25px rgba(255, 71, 87, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    
+    &:focus {
+      box-shadow: 
+        0 4px 15px rgba(255, 71, 87, 0.3),
+        0 0 0 3px rgba(255, 71, 87, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+  }
+  // Success/Submit button (green variant)
+  &.submit {
+    background: linear-gradient(145deg, #22c55e, #16a34a);
+    box-shadow: 
+      0 4px 15px rgba(34, 197, 94, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: linear-gradient(145deg, #34d571, #22c55e);
+      box-shadow: 
+        0 8px 25px rgba(34, 197, 94, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    
+    &:focus {
+      box-shadow: 
+        0 4px 15px rgba(34, 197, 94, 0.3),
+        0 0 0 3px rgba(34, 197, 94, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+  }
+  // Sign out button
+  &.signout {
+    background: linear-gradient(145deg, $medium-grey, color.adjust($medium-grey, $lightness: -10%));
+    padding: 8px 12px;
+    height: 36px;
+    box-shadow: 
+      0 3px 10px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    &:hover {
+      background: linear-gradient(145deg, $dark-grey, color.adjust($dark-grey, $lightness: -5%));
+      box-shadow: 
+        0 6px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  // Small variant
+  &.small {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 0.875em;
+  }
+
+  // Large variant
+  &.large {
+    height: 52px;
+    padding: 0 32px;
+    font-size: 1.1em;
+  }
+}
+
+// Base button class for links that should look like buttons
+.base-btn {
   @include base-btn();
 }

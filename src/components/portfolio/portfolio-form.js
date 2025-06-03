@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { DropzoneComponent } from 'react-dropzone-component';
-import { InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
+import { InputLabel, Select, MenuItem, FormControl, Chip, Box } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
@@ -33,12 +33,10 @@ const style = {
 export default class PortfolioForm extends Component {
 
     constructor(props) {
-        super(props);
-
-        this.state = {
+        super(props);        this.state = {
             name: "",
             description: "",
-            category: "",
+            category: [], // Changed to array for multiple categories
             position: "",
             url: "",
             thumb_image: "",
@@ -47,7 +45,7 @@ export default class PortfolioForm extends Component {
             editMode: false,
             apiUrl: "https://theronlindsay.devcamp.space/portfolio/portfolio_items",
             apiAction: 'post',
-
+            availableCategories: ['AI', 'Gaming', 'Software', 'Web', 'Design', 'UX', 'Mobile', 'Media', 'Animation', 'Multiplayer', 'VR']
         };
 
 
@@ -92,13 +90,11 @@ export default class PortfolioForm extends Component {
                 logo_url
             } = this.props.portfolioToEdit;
 
-            this.props.clearPortfolioToEdit();
-
-            this.setState({
+            this.props.clearPortfolioToEdit();            this.setState({
                 id: id,
                 name: name || "",
                 description: description || "",
-                category: category || "",
+                category: category ? (Array.isArray(category) ? category : category.split(',').map(c => c.trim())) : [], // Handle both array and string formats
                 position: position || "",
                 url: url || "",
                 editMode: true,
@@ -150,7 +146,7 @@ export default class PortfolioForm extends Component {
         formData.append("portfolio_item[name]", this.state.name);
         formData.append("portfolio_item[description]", this.state.description);
         formData.append("portfolio_item[url]", this.state.url);
-        formData.append("portfolio_item[category]", this.state.category);
+        formData.append("portfolio_item[category]", Array.isArray(this.state.category) ? this.state.category.join(', ') : this.state.category);
         formData.append("portfolio_item[position]", this.state.position);
 
         if (this.state.thumb_image) {
@@ -166,12 +162,19 @@ export default class PortfolioForm extends Component {
         }
 
         return formData;
-    }
-
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
+    }    handleChange(event) {
+        const { name, value } = event.target;
+        
+        if (name === 'category') {
+            // Handle multiple category selection
+            this.setState({
+                [name]: typeof value === 'string' ? value.split(',') : value
+            });
+        } else {
+            this.setState({
+                [name]: value
+            });
+        }
         console.log("setState");
     }
 
@@ -187,11 +190,10 @@ export default class PortfolioForm extends Component {
                     this.props.handleEditFormSubmission();
                 } else {
                     this.props.handleNewFormSubmission(response.data.portfolio_item);
-                }
-                this.setState({
+                }                this.setState({
                     name: "",
                     description: "",
-                    category: "",
+                    category: [],
                     position: "",
                     url: "",
                     thumb_image: "",
@@ -222,23 +224,39 @@ export default class PortfolioForm extends Component {
                 <div className="two-column">
                     <div className="pos">
                         <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange} />
-                    </div>
-
-
-                    <FormControl style={style.FormControl}>
-                        <InputLabel id="Category" style={style.InputLabel}>Category</InputLabel>
+                    </div>                    <FormControl style={style.FormControl}>
+                        <InputLabel id="Category" style={style.InputLabel}>Categories</InputLabel>
                         <Select
                             disableUnderline
                             style={style.Select}
                             labelId="Category"
                             id="Category"
                             name="category"
+                            multiple
                             value={this.state.category}
                             onChange={this.handleChange}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map((value) => (
+                                        <Chip 
+                                            key={value} 
+                                            label={value} 
+                                            size="small"
+                                            style={{ 
+                                                backgroundColor: '#4a90e2', 
+                                                color: 'white',
+                                                margin: '2px'
+                                            }}
+                                        />
+                                    ))}
+                                </Box>
+                            )}
                         >
-                            <MenuItem value="eCommerce" style={style.active}>eCommerce</MenuItem>
-                            <MenuItem value="Social" style={style.active}>Social</MenuItem>
-                            <MenuItem value="Other" style={style.active}>Other</MenuItem>
+                            {this.state.availableCategories.map((category) => (
+                                <MenuItem key={category} value={category} style={style.active}>
+                                    {category}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 </div>
@@ -308,11 +326,9 @@ export default class PortfolioForm extends Component {
                         >
                             <div className="dz-message">Logo image</div>
                         </DropzoneComponent>
-                    )}
+                    )}                </div>
 
-                </div>
-
-                <div >
+                <div className="submit-wrapper">
                     <button className="btn submit" type="submit">Save</button>
                 </div>
             </form>

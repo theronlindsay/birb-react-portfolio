@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PortfolioItem from "./portfolio-item";
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class PortfolioContainer extends Component {
     constructor() {
@@ -9,12 +10,14 @@ export default class PortfolioContainer extends Component {
         this.state = {
             pageTitle: "Welcome to my Portfolio",
             isLoading: false,
-            data: []
+            data: [],
+            filtersVisible: false // Track filter visibility on mobile
         };
         console.log("Portfolio Cointainer has rendered!");
 
         this.handleFilter = this.handleFilter.bind(this);
         this.getPortfolioItems = this.getPortfolioItems.bind(this);
+        this.toggleFilters = this.toggleFilters.bind(this);
     }
 
     getPortfolioItems(filter = null) {
@@ -42,14 +45,20 @@ export default class PortfolioContainer extends Component {
             .then(function () {
                 // always executed
             });
-    }
-
-    handleFilter(filter) {
+    }    handleFilter(filter) {
         if (filter === "CLEAR_FILTERS") {
             this.getPortfolioItems();
         } else {
             this.getPortfolioItems(filter);
         }
+        // Close filters on mobile after selection
+        this.setState({ filtersVisible: false });
+    }
+
+    toggleFilters() {
+        this.setState(prevState => ({
+            filtersVisible: !prevState.filtersVisible
+        }));
     }
 
     portfolioItems() {
@@ -67,28 +76,38 @@ export default class PortfolioContainer extends Component {
 
     componentDidMount() {
         this.getPortfolioItems();
-    }
-
-    render() {
-
-
-
+    }    render() {
         if (this.state.isLoading) {
             return <div>Loading...</div>
         }
 
-        // this.getPortfolioItems();
-
         return (
             <div className="portfolio-wrapper">
-                <div className="filters">
+                {/* Mobile filter toggle button */}                <div className="mobile-filter-toggle">
+                    <button 
+                        className="btn filter-toggle-btn" 
+                        onClick={this.toggleFilters}
+                        aria-label="Toggle filters"
+                        aria-expanded={this.state.filtersVisible}
+                    >
+                        <FontAwesomeIcon icon="filter" />
+                        <span>Filters</span>
+                        <FontAwesomeIcon 
+                            icon={this.state.filtersVisible ? "chevron-up" : "chevron-down"} 
+                            className="chevron"
+                        />
+                    </button>
+                </div>
+
+                {/* Filter buttons */}
+                <div className={`filters btn-group centered ${this.state.filtersVisible ? 'visible' : ''}`}>
                     <button className="btn" onClick={() => this.handleFilter('CLEAR_FILTERS')}>All</button>
                     <button className="btn" onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
                     <button className="btn" onClick={() => this.handleFilter('Social')}>Social</button>
                     <button className="btn" onClick={() => this.handleFilter('Other')}>Other</button>
                 </div>
+                
                 <div className="portfolioItemsContainer">
-
                     {this.portfolioItems()}
                 </div>
             </div>

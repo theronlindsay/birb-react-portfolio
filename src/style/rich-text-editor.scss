@@ -1,3 +1,5 @@
+@use "./mixins.scss" as *;
+
 .rdw-image-modal {
   left: -215px;
 }
@@ -11,7 +13,8 @@
 }
 
 .rdw-embedded-modal-btn,
-.rdw-image-modal-btn {
+.rdw-image-modal-btn,
+.rdw-link-modal-btn {
   @include base-btn();
 }
 
@@ -32,4 +35,50 @@
 
 .rdw-dropdown-carettoopen {
   border-top-color: white;
+}
+
+// Responsive design for Rich Text Editor
+@media (max-width: 768px) {
+  .rdw-image-modal {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+  }
+
+  .rdw-emoji-modal {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+  }
+
+  .rdw-embedded-modal {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rdw-image-modal {
+    width: 180px;
+    font-size: 12px;
+  }
+
+  .rdw-emoji-modal {
+    width: 180px;
+    height: 120px;
+  }
+
+  .rdw-embedded-modal {
+    width: 180px;
+    font-size: 12px;
+  }
+
+  .rdw-embedded-modal-btn,
+  .rdw-image-modal-btn,
+  .rdw-link-modal-btn {
+    font-size: 11px;
+    padding: 4px 8px;
+    height: 26px;
+  }
 }

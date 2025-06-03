@@ -2,6 +2,6 @@
 
 // polyfills and vendors
 
-if (!window._babelPolyfill) {
-  require('babel-polyfill');
-}
+// Using core-js for polyfills with Babel 7
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';

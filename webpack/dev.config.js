@@ -1,5 +1,5 @@
 const path = require('path');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 
 const env = require('../env');
@@ -7,10 +7,9 @@ const proxyRules = require('../proxy/rules');
 
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 
-module.exports = webpackMerge(webpackCommon, {
+module.exports = merge(webpackCommon, {
 
   devtool: 'inline-source-map',
   mode: 'development',
@@ -42,13 +41,14 @@ module.exports = webpackMerge(webpackCommon, {
             options: {
               importLoaders: 2
             }
-          },
-          {
+          },          {
             loader: 'sass-loader',
             options: {
-              outputStyle: 'expanded',
+              api: 'modern',
               sourceMap: true,
-              sourceMapContents: true
+              sassOptions: {
+                outputStyle: 'expanded'
+              }
             }
           }
         ]
@@ -56,13 +56,7 @@ module.exports = webpackMerge(webpackCommon, {
     ]
 
   },
-
   plugins: [
-    new DefinePlugin({
-      'process.env': {
-        NODE_ENV: "'development'"
-      }
-    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '../static/index.html'),
@@ -70,23 +64,24 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new HotModuleReplacementPlugin()
   ],
-
   devServer: {
     host: env.devServer.host || 'localhost',
     port: env.devServer.port || 3000,
-    contentBase: path.resolve(__dirname, '../static'),
-    watchContentBase: true,
+    static: {
+      directory: path.resolve(__dirname, '../static'),
+      watch: true
+    },
     compress: true,
     hot: true,
     historyApiFallback: {
       disableDotRule: true
     },
-    watchOptions: {
-      ignored: /node_modules/
-    },
-    overlay: {
-      warnings: true,
-      errors: true
+    watchFiles: ['src/**/*'],
+    client: {
+      overlay: {
+        warnings: true,
+        errors: true
+      }
     },
     proxy: proxyRules
   }

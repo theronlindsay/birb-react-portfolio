@@ -1,5 +1,11 @@
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
 .detail-wrapper {
-  position: absolute;
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  
   .infobar {
     background-color: $brave-dark;
     display: flex;
@@ -7,9 +13,12 @@
     max-width: 40vw;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    position: fixed;
-    margin-top: 5vh;
+    position: absolute;
+    top: 5vh;
+    left: 0;
+    z-index: 10;
     border: 2vh solid transparent;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
     .left {
       width: 10vw;
@@ -17,8 +26,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
+      
       img {
         width: 100%;
+        max-width: 120px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
 
@@ -26,9 +44,30 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 20px;
+      
+      .toprow {
+        h1 {
+          margin: 0 0 10px 0;
+          font-size: 1.5rem;
+          
+          a {
+            color: $primary-blue;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            
+            &:hover {
+              color: $accent-blue;
+            }
+          }
+        }
+      }
+      
       .bottomrow {
         p {
-          margin: unset;
+          margin: 0;
+          color: $accent-blue;
+          font-weight: 500;
         }
       }
     }
@@ -41,14 +80,157 @@
     background-position: center;
     box-shadow: rgba(0, 0, 0, 0.58) 0px 50px 79px -8px inset;
   }
-
+  
   .description {
     background-color: $brave;
-    position: fixed;
-    left: 25px;
+    position: relative;
+    margin: 25px;
+    margin-top: 0;
+    padding: 35px;
+    border-radius: 15px;
+    z-index: 5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+    
     a {
       @include base-btn();
-      padding: 0.5em;
+      padding: 12px 24px;
+      text-decoration: none;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .detail-wrapper {
+    .infobar {
+      max-width: 50vw;
+      border-radius: 20px;
+      
+      .left {
+        width: 12vw;
+        padding: 15px;
+      }
+      
+      .right {
+        padding: 15px;
+        
+        .toprow h1 {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-wrapper {
+    .infobar {
+      position: static;
+      max-width: 100%;
+      width: calc(100% - 40px);
+      margin: 20px;
+      border-radius: 15px;
+      flex-direction: column;
+      text-align: center;
+      
+      .left {
+        width: 100%;
+        padding: 20px 20px 10px 20px;
+        
+        img {
+          max-width: 100px;
+        }
+      }
+      
+      .right {
+        width: 100%;
+        padding: 10px 20px 20px 20px;
+        
+        .toprow h1 {
+          font-size: 1.2rem;
+          margin-bottom: 8px;
+        }
+        
+        .bottomrow p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .back-window {
+      height: 300px;
+      margin-top: 0;
+    }
+    
+    .description {
+      margin: 20px;
+      padding: 25px;
+      
+      .btn-group {
+        justify-content: center;
+        margin-top: 20px;
+      }
+      
+      a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-wrapper {
+    .infobar {
+      margin: 15px;
+      
+      .left {
+        padding: 15px;
+        
+        img {
+          max-width: 80px;
+        }
+      }
+      
+      .right {
+        padding: 10px 15px 15px 15px;
+        
+        .toprow h1 {
+          font-size: 1.1rem;
+        }
+        
+        .bottomrow p {
+          font-size: 0.85rem;
+        }
+      }
+    }
+    
+    .back-window {
+      height: 250px;
+    }
+    
+    .description {
+      margin: 15px;
+      padding: 20px;
+      
+      .btn-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 0.85rem;
+      }
     }
   }
 }

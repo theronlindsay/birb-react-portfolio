@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 3px;
@@ -37,4 +39,67 @@ a {
 .containter {
   display: grid;
   grid-template-columns: 1fr;
+}
+
+// Global responsive utilities
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// Button spacing utilities
+.btn-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &.vertical {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &.centered {
+    justify-content: center;
+  }
+
+  &.spaced {
+    gap: 20px;
+  }
+
+  &.wide-spaced {
+    gap: 30px;
+  }
+}
+
+// Responsive text scaling
+@media (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  .container {
+    padding: 0;
+  }
+
+  // Mobile bottom navigation spacing
+  body {
+    padding-bottom: 120px; // Account for fixed bottom navigation
+  }
 }

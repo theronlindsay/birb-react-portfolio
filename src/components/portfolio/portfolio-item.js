@@ -10,6 +10,15 @@ export default class PortfolioItem extends Component {
         }
     }
 
+    // Function to strip HTML tags from text
+    stripHtml(html) {
+        if (!html) return '';
+        // Create a temporary div element to parse HTML and extract text content
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+    }
+
     handleMouseEnter() {
         this.setState({ PortfolioItemClass: "image-blur" });
     }
@@ -32,10 +41,8 @@ export default class PortfolioItem extends Component {
                     <div className="imgText">
                         <div className="logoWrapper">
                             <img src={logo_url} />
-                        </div>
-
-                        <div className="subtitle">
-                            {description}
+                        </div>                        <div className="subtitle">
+                            {this.stripHtml(description)}
                         </div>
                     </div>
                 </div>

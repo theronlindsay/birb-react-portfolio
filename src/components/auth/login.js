@@ -53,18 +53,14 @@ export default class Login extends Component{
 
                 <h1>Login to access the Dashboard</h1>
 
-                <div>{this.state.errorText}</div>
-
-
-            <form onSubmit={this.handleSubmit}>
+                <div>{this.state.errorText}</div>            <form onSubmit={this.handleSubmit} className="auth-form">
                 <input type = "email" name = "email" placeholder = "E-Mail" value={this.state.email} onChange={this.handleChange}/>
                 <input type = "password" name = "password" placeholder = "Password" value={this.state.password} onChange={this.handleChange}/>
-            </form>
-
-
-                <div>
-                    <button type="submit" onClick={this.handleSubmit}>Login</button>
+                
+                <div className="btn-group">
+                    <button type="submit" className="btn submit">Login</button>
                 </div>
+            </form>
             </div>
         );
     }
